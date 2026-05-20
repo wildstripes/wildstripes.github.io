@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildVenture Safaris — Experience the Untamed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #0d0f0e;
+            --bg-dark: #141816;
+            --bg-card: #1a1f1c;
+            --gold: #c8a45c;
+            --gold-light: #e0c67e;
+            --gold-dark: #9a7b3a;
+            --cream: #f5efe0;
+            --text: #e0ddd5;
+            --text-muted: #a09b8f;
+            --accent-green: #3d6b4f;
+            --accent-orange: #d4783b;
+            --glass-bg: rgba(26, 31, 28, 0.7);
+            --glass-border: rgba(200, 164, 92, 0.25);
+            --shadow-gold: 0 0 30px rgba(200, 164, 92, 0.15);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dark);
+            border-radius: 10px;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(0px);
+        }
+        .navbar.scrolled {
+            background: rgba(13, 15, 14, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.8rem 3rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(200, 164, 92, 0.2);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-logo i {
+            color: var(--gold);
+            font-size: 1.6rem;
+        }
+        .nav-logo span {
+            color: var(--gold);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .btn-nav {
+            background: var(--gold);
+            color: #0d0f0e !important;
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease !important;
+            font-size: 0.9rem !important;
+        }
+        .btn-nav:hover {
+            background: var(--gold-light) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 164, 92, 0.3);
+        }
+        .btn-nav::after {
+            display: none !important;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO CAROUSEL ===== */
+        .hero-carousel {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
+        }
+        .carousel-slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(13, 15, 14, 0.3) 0%,
+                    rgba(13, 15, 14, 0.15) 40%,
+                    rgba(13, 15, 14, 0.7) 85%,
+                    rgba(13, 15, 14, 0.95) 100%);
+            z-index: 1;
+        }
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1;
+        }
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .slide-tag {
+            display: inline-block;
+            background: rgba(200, 164, 92, 0.2);
+            border: 1px solid rgba(200, 164, 92, 0.4);
+            color: var(--gold-light);
+            padding: 0.5rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .slide-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        .slide-content h1 span {
+            color: var(--gold-light);
+            font-style: italic;
+        }
+        .slide-content p {
+            font-size: 1.2rem;
+            color: #d5d0c5;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .slide-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: #0d0f0e;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(200, 164, 92, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+        /* Carousel Controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .carousel-arrow {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .carousel-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #0d0f0e;
+            box-shadow: var(--shadow-gold);
+        }
+        .carousel-dots {
+            display: flex;
+            gap: 0.7rem;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: none;
+        }
+        .carousel-dot.active {
+            background: var(--gold);
+            width: 32px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(200, 164, 92, 0.6);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounceDown 2s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        @keyframes bounceDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 6rem 3rem;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-tag {
+            display: inline-block;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .section-header h2 span {
+            color: var(--gold-light);
+            font-style: italic;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            margin-top: 0.8rem;
+            font-size: 1.05rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== ABOUT STRIP ===== */
+        .about-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: -80px auto 0;
+            position: relative;
+            z-index: 5;
+            padding: 0 2rem;
+        }
+        .about-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+        .about-stat:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--gold);
+        }
+        .about-stat i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+        .about-stat h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+        }
+        .about-stat p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== GALLERY CAROUSEL ===== */
+        .gallery-section {
+            background: var(--bg-dark);
+        }
+        .gallery-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+        }
+        .gallery-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            gap: 1.5rem;
+        }
+        .gallery-card {
+            min-width: calc(33.333% - 1rem);
+            flex-shrink: 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            height: 380px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-card:hover img {
+            transform: scale(1.08);
+        }
+        .gallery-card:hover {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-card .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+            z-index: 2;
+        }
+        .gallery-overlay h4 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .gallery-overlay span {
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .gallery-nav button {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .gallery-nav button:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #0d0f0e;
+        }
+
+        /* ===== BOOKING SECTION ===== */
+        .booking-section {
+            background: var(--bg-deep);
+            position: relative;
+        }
+        .booking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(200, 164, 92, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .booking-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        .booking-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .booking-card .booking-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(20, 24, 22, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.9rem 1.2rem;
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(200, 164, 92, 0.08);
+            background: rgba(20, 24, 22, 1);
+        }
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23c8a45c'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            cursor: pointer;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+        .btn-submit {
+            grid-column: 1 / -1;
+            background: var(--gold);
+            color: #0d0f0e;
+            padding: 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        .btn-submit:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(200, 164, 92, 0.3);
+        }
+        .booking-confirmation {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+        .booking-confirmation.show {
+            display: block;
+        }
+        .booking-confirmation i {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .booking-confirmation h3 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+        }
+        .booking-confirmation p {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* ===== PACKAGES ===== */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .package-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--gold);
+        }
+        .package-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .package-card:hover img {
+            transform: scale(1.05);
+        }
+        .package-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gold);
+            color: #0d0f0e;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            z-index: 3;
+        }
+        .package-info {
+            padding: 1.8rem;
+        }
+        .package-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .package-info .duration {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .package-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+        .package-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+        .package-price small {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .package-card .btn-book-now {
+            display: inline-block;
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        .package-card .btn-book-now:hover {
+            background: var(--gold);
+            color: #0d0f0e;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            background: var(--bg-dark);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+        .testimonial-card .stars {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        .testimonial-card p {
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .testimonial-author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .testimonial-author strong {
+            color: #fff;
+            display: block;
+            font-size: 0.9rem;
+        }
+        .testimonial-author span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-deep);
+            border-top: 1px solid rgba(200, 164, 92, 0.2);
+            padding: 4rem 3rem 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .footer-col p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            background: var(--bg-card);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-links a:hover {
+            background: var(--gold);
+            color: #0d0f0e;
+            border-color: var(--gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .slide-content h1 {
+                font-size: 3.2rem;
+            }
+            .gallery-card {
+                min-width: calc(50% - 0.75rem);
+                height: 320px;
+            }
+            .about-strip {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: -60px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px;
+                height: 100vh;
+                background: rgba(13, 15, 14, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                gap: 1.8rem;
+                border-left: 1px solid rgba(200, 164, 92, 0.3);
+                z-index: 999;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            .slide-content h1 {
+                font-size: 2.4rem;
+            }
+            .slide-content p {
+                font-size: 1rem;
+            }
+            .gallery-card {
+                min-width: 85%;
+                height: 300px;
+            }
+            .about-strip {
+                grid-template-columns: 1fr 1fr;
+                margin-top: -40px;
+                padding: 0 1rem;
+            }
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            .booking-card {
+                padding: 2rem 1.5rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .carousel-controls {
+                bottom: 1.5rem;
+            }
+            .scroll-indicator {
+                bottom: 6rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .slide-content h1 {
+                font-size: 1.9rem;
+            }
+            .about-strip {
+                grid-template-columns: 1fr;
+            }
+            .gallery-card {
+                min-width: 90%;
+                height: 260px;
+            }
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-primary,
+            .btn-outline {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <i class="fa-solid fa-paw"></i> Wild<span>Venture</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#packages">Safaris</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="#booking" class="btn-nav">Reserve <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ===== HERO CAROUSEL ===== -->
+    <section class="hero-carousel" id="home">
+        <div class="carousel-slides" id="heroSlides">
+            <!-- Slide 1 -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=80');">
+                <div class="slide-content">
+                    <span class="slide-tag">Tanzania • Serengeti</span>
+                    <h1>Witness the <span>Great Migration</span></h1>
+                    <p>Over two million wildebeest thunder across the plains — a spectacle unlike any other on Earth.</p>
+                    <div class="slide-buttons">
+                        <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Your Safari</a>
+                        <a href="#gallery" class="btn-outline"><i class="fa-solid fa-images"></i> Explore Gallery</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1549366021-9f761d450615?w=1600&q=80');">
+                <div class="slide-content">
+                    <span class="slide-tag">Kenya • Maasai Mara</span>
+                    <h1>Face the <span>Majestic Lions</span></h1>
+                    <p>Come eye-to-eye with the king of the savannah in its natural kingdom.</p>
+                    <div class="slide-buttons">
+                        <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Your Safari</a>
+                        <a href="#gallery" class="btn-outline"><i class="fa-solid fa-images"></i> Explore Gallery</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=1600&q=80');">
+                <div class="slide-content">
+                    <span class="slide-tag">Botswana • Okavango Delta</span>
+                    <h1>Glide Through <span>Wild Waters</span></h1>
+                    <p>Explore the labyrinthine waterways teeming with elephants, hippos, and rare birdlife.</p>
+                    <div class="slide-buttons">
+                        <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Your Safari</a>
+                        <a href="#gallery" class="btn-outline"><i class="fa-solid fa-images"></i> Explore Gallery</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=1600&q=80');">
+                <div class="slide-content">
+                    <span class="slide-tag">South Africa • Kruger</span>
+                    <h1>Track the <span>Elusive Leopard</span></h1>
+                    <p>Venture deep into the bush at dawn for a chance to spot Africa's most secretive big cat.</p>
+                    <div class="slide-buttons">
+                        <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Your Safari</a>
+                        <a href="#gallery" class="btn-outline"><i class="fa-solid fa-images"></i> Explore Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+            <button class="carousel-arrow" id="prevSlide" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carousel-dots" id="carouselDots"></div>
+            <button class="carousel-arrow" id="nextSlide" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT STATS STRIP ===== -->
+    <div class="about-strip">
+        <div class="about-stat">
+            <i class="fa-solid fa-earth-africa"></i>
+            <h3>12+</h3>
+            <p>African Countries</p>
+        </div>
+        <div class="about-stat">
+            <i class="fa-solid fa-users"></i>
+            <h3>8,500+</h3>
+            <p>Happy Explorers</p>
+        </div>
+        <div class="about-stat">
+            <i class="fa-solid fa-binoculars"></i>
+            <h3>150+</h3>
+            <p>Expert Guides</p>
+        </div>
+        <div class="about-stat">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>100%</h3>
+            <p>Safety Record</p>
+        </div>
+    </div>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-header">
+            <span class="section-tag">Our Gallery</span>
+            <h2>Moments <span>Captured</span> in the Wild</h2>
+            <p>Swipe through breathtaking snapshots from our travelers' unforgettable journeys.</p>
+        </div>
+        <div class="gallery-carousel-container" id="galleryContainer">
+            <div class="gallery-track" id="galleryTrack">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1535338857958-684845abf0e5?w=600&q=80" alt="Elephant herd at sunset" loading="lazy">
+                    <div class="gallery-overlay"><h4>Elephant Parade</h4><span>Amboseli, Kenya</span></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1610393300071-8f5c6f1b0b7d?w=600&q=80" alt="Lioness resting" loading="lazy">
+                    <div class="gallery-overlay"><h4>Queen's Rest</h4><span>Serengeti, Tanzania</span></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=600&q=80" alt="Zebras at waterhole" loading="lazy">
+                    <div class="gallery-overlay"><h4>Striped Reflection</h4><span>Etosha, Namibia</span></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1504173010664-32509aeebb62?w=600&q=80" alt="Giraffe silhouette" loading="lazy">
+                    <div class="gallery-overlay"><h4>Towering Grace</h4><span>Kruger, South Africa</span></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1581852017103-68ac65514cf7?w=600&q=80" alt="Cheetah on termite mound" loading="lazy">
+                    <div class="gallery-overlay"><h4>Speed Survey</h4><span>Maasai Mara, Kenya</span></div>
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1547970810-dc1eac6d57d0?w=600&q=80" alt="Flamingos at lake" loading="lazy">
+                    <div class="gallery-overlay"><h4>Pink Horizon</h4><span>Lake Nakuru, Kenya</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-nav">
+            <button id="galleryPrev" aria-label="Previous gallery images"><i class="fa-solid fa-arrow-left"></i></button>
+            <button id="galleryNext" aria-label="Next gallery images"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <!-- ===== PACKAGES SECTION ===== -->
+    <section class="section" id="packages">
+        <div class="section-header">
+            <span class="section-tag">Curated Expeditions</span>
+            <h2>Signature <span>Safari</span> Packages</h2>
+            <p>Handpicked experiences designed to immerse you in Africa's most iconic wilderness.</p>
+        </div>
+        <div class="packages-grid">
+            <div class="package-card">
+                <span class="package-badge">Bestseller</span>
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80" alt="Great Migration Safari" loading="lazy">
+                <div class="package-info">
+                    <h4>Great Migration Odyssey</h4>
+                    <span class="duration"><i class="fa-solid fa-clock"></i> 7 Days • 6 Nights</span>
+                    <p>Follow the thundering herds across the Serengeti with luxury tented camps and private game drives.</p>
+                    <div class="package-price">$4,850 <small>/ person</small></div>
+                    <a href="#booking" class="btn-book-now">Reserve Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="package-card">
+                <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?w=600&q=80" alt="Big Five Safari" loading="lazy">
+                <div class="package-info">
+                    <h4>Big Five Encounter</h4>
+                    <span class="duration"><i class="fa-solid fa-clock"></i> 5 Days • 4 Nights</span>
+                    <p>Track lion, leopard, elephant, rhino, and buffalo in the world-renowned Kruger National Park.</p>
+                    <div class="package-price">$3,200 <small>/ person</small></div>
+                    <a href="#booking" class="btn-book-now">Reserve Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="package-card">
+                <img src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=600&q=80" alt="Delta Water Safari" loading="lazy">
+                <div class="package-info">
+                    <h4>Okavango Water Safari</h4>
+                    <span class="duration"><i class="fa-solid fa-clock"></i> 6 Days • 5 Nights</span>
+                    <p>Glide through reed-lined channels in a mokoro canoe, surrounded by elephants and hippos.</p>
+                    <div class="package-price">$5,600 <small>/ person</small></div>
+                    <a href="#booking" class="btn-book-now">Reserve Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOOKING SECTION ===== -->
+    <section class="section booking-section" id="booking">
+        <div class="section-header">
+            <span class="section-tag">Reservations</span>
+            <h2>Book Your <span>Adventure</span></h2>
+            <p>Secure your spot in the wild. Fill in the details below and we'll handle the rest.</p>
+        </div>
+        <div class="booking-card" id="bookingCard">
+            <!-- Booking Form -->
+            <form class="booking-form" id="bookingForm">
+                <h3 style="grid-column:1/-1;">Plan Your Safari</h3>
+                <p class="booking-subtitle" style="grid-column:1/-1;">All fields marked with * are required</p>
+
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Destination *</label>
+                    <select required>
+                        <option value="">Select a destination</option>
+                        <option value="serengeti">Serengeti, Tanzania</option>
+                        <option value="kruger">Kruger, South Africa</option>
+                        <option value="masai-mara">Maasai Mara, Kenya</option>
+                        <option value="okavango">Okavango Delta, Botswana</option>
+                        <option value="etosha">Etosha, Namibia</option>
+                        <option value="chobe">Chobe, Botswana</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Check-in Date *</label>
+                    <input type="date" required min="2026-06-01">
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests *</label>
+                    <select required>
+                        <option value="">Select</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6+">6+ Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Package Type</label>
+                    <select>
+                        <option value="">Select a package</option>
+                        <option value="great-migration">Great Migration Odyssey</option>
+                        <option value="big-five">Big Five Encounter</option>
+                        <option value="okavango">Okavango Water Safari</option>
+                        <option value="custom">Custom Expedition</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label>Special Requests / Notes</label>
+                    <textarea placeholder="Dietary requirements, accessibility needs, celebration occasions..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-paper-plane"></i> Confirm Reservation
+                </button>
+            </form>
+            <!-- Confirmation Message -->
+            <div class="booking-confirmation" id="bookingConfirmation">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>Reservation Received!</h3>
+                <p>Thank you for booking with WildVenture. We've sent a confirmation email with all the details. Our team will reach out within 24 hours to finalize your itinerary.</p>
+                <button class="btn-primary" style="margin-top:1.5rem;" onclick="resetBooking()">
+                    <i class="fa-solid fa-plus"></i> Make Another Booking
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonials-section">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2>What Our <span>Explorers</span> Say</h2>
+            <p>Real stories from those who ventured into the wild with us.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"An absolutely life-changing experience. Our guide knew exactly where to find a leopard with her cubs. The luxury camp exceeded every expectation."</p>
+                <div class="testimonial-author">
+                    <div class="avatar">SR</div>
+                    <div><strong>Sarah & Robert M.</strong><span>New York, USA</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The Great Migration was even more spectacular than we imagined. Thousands of wildebeest crossing the river — we were speechless. Worth every penny."</p>
+                <div class="testimonial-author">
+                    <div class="avatar">AK</div>
+                    <div><strong>Anika K.</strong><span>London, UK</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"WildVenture handled every detail seamlessly. From airport pickup to the farewell dinner under the stars — pure magic. We're already planning our return."</p>
+                <div class="testimonial-author">
+                    <div class="avatar">JP</div>
+                    <div><strong>Jean-Pierre L.</strong><span>Paris, France</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4><i class="fa-solid fa-paw"></i> WildVenture Safaris</h4>
+                <p>Crafting unforgettable wildlife experiences across Africa since 2008. Your gateway to the continent's most awe-inspiring natural wonders.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#packages">Safari Packages</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#">Serengeti, Tanzania</a></li>
+                    <li><a href="#">Maasai Mara, Kenya</a></li>
+                    <li><a href="#">Kruger, South Africa</a></li>
+                    <li><a href="#">Okavango, Botswana</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:hello@wildventure.com"><i class="fa-solid fa-envelope"></i> hello@wildventure.com</a></li>
+                    <li><a href="tel:+15551234567"><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</a></li>
+                    <li><a href="#"><i class="fa-solid fa-location-dot"></i> Arusha, Tanzania</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WildVenture Safaris. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== HERO CAROUSEL =====
+        const heroSlides = document.getElementById('heroSlides');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        let heroInterval;
+        const dotsContainer = document.getElementById('carouselDots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateSlides() {
+            heroSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+            resetHeroInterval();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlides();
+            resetHeroInterval();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlides();
+            resetHeroInterval();
+        }
+
+        function resetHeroInterval() {
+            clearInterval(heroInterval);
+            heroInterval = setInterval(nextSlide, 5500);
+        }
+
+        document.getElementById('nextSlide').addEventListener('click', nextSlide);
+        document.getElementById('prevSlide').addEventListener('click', prevSlide);
+        heroInterval = setInterval(nextSlide, 5500);
+
+        // Touch/swipe support for hero
+        let touchStartX = 0;
+        let touchEndX = 0;
+        heroSlides.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+        heroSlides.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 60) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+        });
+
+        // ===== GALLERY CAROUSEL =====
+        const galleryTrack = document.getElementById('galleryTrack');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        let galleryIndex = 0;
+        const cardsPerView = () => window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+        const totalGalleryCards = galleryCards.length;
+
+        function updateGallery() {
+            const perView = cardsPerView();
+            const maxIndex = totalGalleryCards - perView;
+            if (galleryIndex > maxIndex) galleryIndex = maxIndex;
+            if (galleryIndex < 0) galleryIndex = 0;
+            const cardWidth = galleryCards[0].offsetWidth + 24; // 24px gap
+            galleryTrack.style.transform = `translateX(-${galleryIndex * cardWidth}px)`;
+        }
+
+        document.getElementById('galleryNext').addEventListener('click', () => {
+            const perView = cardsPerView();
+            const maxIndex = totalGalleryCards - perView;
+            if (galleryIndex < maxIndex) {
+                galleryIndex++;
+                updateGallery();
+            }
+        });
+        document.getElementById('galleryPrev').addEventListener('click', () => {
+            if (galleryIndex > 0) {
+                galleryIndex--;
+                updateGallery();
+            }
+        });
+
+        // Touch/swipe for gallery
+        let galleryTouchStart = 0;
+        let galleryTouchEnd = 0;
+        galleryTrack.addEventListener('touchstart', (e) => { galleryTouchStart = e.changedTouches[0].screenX; });
+        galleryTrack.addEventListener('touchend', (e) => {
+            galleryTouchEnd = e.changedTouches[0].screenX;
+            const diff = galleryTouchStart - galleryTouchEnd;
+            const perView = cardsPerView();
+            const maxIndex = totalGalleryCards - perView;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && galleryIndex < maxIndex) { galleryIndex++;
+                    updateGallery(); } else if (diff < 0 && galleryIndex > 0) { galleryIndex--;
+                    updateGallery(); }
+            }
+        });
+
+        window.addEventListener('resize', updateGallery);
+        updateGallery();
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== MOBILE MENU =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // ===== BOOKING FORM =====
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingConfirmation = document.getElementById('bookingConfirmation');
+
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simple validation animation
+            const btn = bookingForm.querySelector('.btn-submit');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+            // Simulate processing
+            setTimeout(() => {
+                bookingForm.style.display = 'none';
+                bookingConfirmation.classList.add('show');
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Confirm Reservation';
+                btn.disabled = false;
+                // Scroll to confirmation
+                bookingConfirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        });
+
+        function resetBooking() {
+            bookingForm.style.display = 'grid';
+            bookingConfirmation.classList.remove('show');
+            bookingForm.reset();
+            bookingForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // ===== SMOOTH SCROLL FOR ALL ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offset = 80;
+                    const position = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: position, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.package-card, .testimonial-card, .about-stat, .gallery-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            observer.observe(el);
+        });
+
+        // Trigger initial visibility for elements in view
+        setTimeout(() => {
+            document.querySelectorAll('.package-card, .testimonial-card, .about-stat, .gallery-card').forEach(
+            el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }, 300);
+    </script>
+</body>
+</html>
