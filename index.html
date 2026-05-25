@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,15 +31,15 @@
             --wild-muted:#9f9a8c;
         }
 
+        html{
+            scroll-behavior:smooth;
+        }
+
         body{
             font-family:'Inter',sans-serif;
             background:var(--wild-bg);
             color:var(--wild-text);
             overflow-x:hidden;
-        }
-
-        html{
-            scroll-behavior:smooth;
         }
 
         /* NAVBAR */
@@ -59,34 +58,35 @@
             backdrop-filter:blur(12px);
         }
 
-        .logo{
-            color:white;
-            text-decoration:none;
-            font-size:1.8rem;
-            font-family:'Playfair Display',serif;
-            font-weight:800;
-        }
-
-        .logo span{
-            color:var(--wild-gold);
+        .logo img{
+            height:52px;
+            width:auto;
+            object-fit:contain;
+            display:block;
         }
 
         .nav-links{
             display:flex;
             gap:2rem;
             list-style:none;
+            align-items:center;
         }
 
         .nav-links a{
             color:white;
             text-decoration:none;
             font-weight:500;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:var(--wild-gold-light);
         }
 
         .btn-reserve{
             background:var(--wild-gold);
             color:black !important;
-            padding:0.7rem 1.5rem;
+            padding:0.8rem 1.5rem;
             border-radius:50px;
             font-weight:700 !important;
         }
@@ -131,7 +131,7 @@
             linear-gradient(
                 to top,
                 rgba(0,0,0,0.85),
-                rgba(0,0,0,0.3)
+                rgba(0,0,0,0.25)
             );
             z-index:1;
         }
@@ -148,7 +148,7 @@
             display:inline-flex;
             align-items:center;
             gap:10px;
-            padding:0.7rem 1.5rem;
+            padding:0.8rem 1.5rem;
             border-radius:50px;
             background:rgba(0,0,0,0.35);
             backdrop-filter:blur(10px);
@@ -295,7 +295,7 @@
             line-height:1.7;
         }
 
-        /* BOOKING SECTION */
+        /* BOOKING */
 
         .booking-wrapper{
             background:#121712;
@@ -390,12 +390,12 @@
             margin-right:10px;
         }
 
-        /* RESPONSIVE */
+        /* MOBILE */
 
         @media(max-width:768px){
 
             .navbar{
-                padding:1rem 1.5rem;
+                padding:1rem 1.2rem;
             }
 
             .nav-links{
@@ -436,23 +436,24 @@
 
         <a href="#" class="logo">
 
-    <img 
-        src="images/logo.png" 
-        alt="The Wild Stripes"
-        style="
-            height:48px;
-            width:auto;
-            object-fit:contain;
-        "
-    >
+            <img src="images/logo.png" alt="The Wild Stripes Logo">
 
-</a>
+        </a>
 
         <ul class="nav-links">
+
             <li><a href="#">Home</a></li>
+
             <li><a href="#experiences">Safaris</a></li>
+
             <li><a href="#booking">Reserve</a></li>
-            <li><a href="#booking" class="btn-reserve">Book Now</a></li>
+
+            <li>
+                <a href="#booking" class="btn-reserve">
+                    Book Now
+                </a>
+            </li>
+
         </ul>
 
     </nav>
@@ -466,8 +467,8 @@
             <!-- P1 -->
             <div class="carousel-slide active" style="background-image:url('images/p1.jpg')"></div>
 
-            <!-- P2 -->
-            <div class="carousel-slide" style="background-image:url('images/p2.jpg')"></div>
+            <!-- P2 JPEG -->
+            <div class="carousel-slide" style="background-image:url('images/p2.jpeg')"></div>
 
             <!-- P3 -->
             <div class="carousel-slide" style="background-image:url('images/p3.jpg')"></div>
@@ -536,154 +537,70 @@
 
             <div class="safari-grid">
 
-                <!-- P6 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p6.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            THRILLING
-                        </span>
-
+                        <span class="expedition-tag">THRILLING</span>
                         <h3>Exclusive Jeep Safaris</h3>
-
-                        <p>
-                            Half-day or full-day off-road adventures
-                            across Chitwan & Bardiya.
-                        </p>
-
+                        <p>Half-day or full-day off-road adventures across Chitwan & Bardiya.</p>
                     </div>
-
                 </div>
 
-                <!-- P7 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p7.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            IMMERSIVE
-                        </span>
-
+                        <span class="expedition-tag">IMMERSIVE</span>
                         <h3>Jungle Walk & Nature Trails</h3>
-
-                        <p>
-                            Explore hidden trails on foot with expert
-                            naturalists.
-                        </p>
-
+                        <p>Explore hidden trails on foot with expert naturalists.</p>
                     </div>
-
                 </div>
 
-                <!-- P8 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p8.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            650+ SPECIES
-                        </span>
-
+                        <span class="expedition-tag">650+ SPECIES</span>
                         <h3>Bird Watching Tours</h3>
-
-                        <p>
-                            Vibrant guided birding tours across
-                            Nepal’s wetlands & forests.
-                        </p>
-
+                        <p>Guided birding tours across Nepal’s wetlands & forests.</p>
                     </div>
-
                 </div>
 
-                <!-- P9 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p9.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            RARE QUEST
-                        </span>
-
+                        <span class="expedition-tag">RARE QUEST</span>
                         <h3>Red Panda Expedition</h3>
-
-                        <p>
-                            Discover the elusive red panda in
-                            eastern Nepal’s forests.
-                        </p>
-
+                        <p>Discover the elusive red panda in eastern Nepal’s forests.</p>
                     </div>
-
                 </div>
 
-                <!-- P10 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p10.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            LEGENDARY
-                        </span>
-
+                        <span class="expedition-tag">LEGENDARY</span>
                         <h3>Snow Leopard Expeditions</h3>
-
-                        <p>
-                            Venture into rugged Himalayan terrain
-                            to seek the ghost of the mountains.
-                        </p>
-
+                        <p>Venture into rugged Himalayan terrain to seek the ghost of the mountains.</p>
                     </div>
-
                 </div>
 
-                <!-- P11 -->
-
                 <div class="safari-card">
-
                     <div class="safari-img">
                         <img src="images/p11.jpg">
                     </div>
-
                     <div class="safari-info">
-
-                        <span class="expedition-tag">
-                            FLEXIBLE
-                        </span>
-
+                        <span class="expedition-tag">FLEXIBLE</span>
                         <h3>Custom Packages (1-5 Days)</h3>
-
-                        <p>
-                            Tailor your safari itinerary around
-                            your interests and travel plans.
-                        </p>
-
+                        <p>Tailor your safari itinerary around your interests and travel plans.</p>
                     </div>
-
                 </div>
 
             </div>
@@ -692,7 +609,7 @@
 
     </section>
 
-    <!-- BOOKING SECTION -->
+    <!-- BOOKING -->
 
     <section class="section" id="booking">
 
@@ -828,8 +745,7 @@
 
                     <p>
                         Ethical wildlife safaris,
-                        tiger tracking and eco-adventures
-                        across Nepal.
+                        tiger tracking and eco-adventures across Nepal.
                     </p>
 
                 </div>
@@ -840,17 +756,11 @@
                         Contact
                     </h4>
 
-                    <p>
-                        +977 - 9843960458
-                    </p>
+                    <p>+977 - 9843960458</p>
 
-                    <p>
-                        wildstripes1111@gmail.com
-                    </p>
+                    <p>wildstripes1111@gmail.com</p>
 
-                    <p>
-                        Kathmandu, Nepal
-                    </p>
+                    <p>Kathmandu, Nepal</p>
 
                 </div>
 
@@ -927,4 +837,3 @@
 
 </body>
 </html>
-```
