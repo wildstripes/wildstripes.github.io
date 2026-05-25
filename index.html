@@ -1,694 +1,930 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>The Wild Stripes | Nepal's Untamed Wilderness Safari</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Wild Stripes | Nepal Wildlife Safari</title>
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        :root {
-            --wild-bg: #0a0c0a;
-            --wild-card: #141a16;
-            --wild-gold: #cb9e4b;
-            --wild-gold-light: #e2bc74;
-            --wild-gold-dark: #9e762e;
-            --wild-cream: #f7f3e6;
-            --wild-text: #ded9cd;
-            --wild-muted: #9f9a8c;
-            --wild-border: rgba(203, 158, 75, 0.25);
-            --shadow-gold: 0 15px 35px rgba(203, 158, 75, 0.12);
-            --radius-lg: 28px;
-            --radius-md: 20px;
-            --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        :root{
+            --wild-bg:#0a0c0a;
+            --wild-card:#141a16;
+            --wild-gold:#cb9e4b;
+            --wild-gold-light:#e2bc74;
+            --wild-text:#ded9cd;
+            --wild-muted:#9f9a8c;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--wild-bg);
-            color: var(--wild-text);
-            line-height: 1.65;
-            overflow-x: hidden;
+        body{
+            font-family:'Inter',sans-serif;
+            background:var(--wild-bg);
+            color:var(--wild-text);
+            overflow-x:hidden;
         }
 
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a201c;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--wild-gold);
-            border-radius: 10px;
+        html{
+            scroll-behavior:smooth;
         }
 
-        /* navigation */
-        .navbar {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1050;
-            padding: 1.2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s ease;
-            backdrop-filter: blur(0px);
-        }
-        .navbar.scrolled {
-            background: rgba(10, 12, 10, 0.85);
-            backdrop-filter: blur(16px);
-            padding: 0.8rem 3rem;
-            border-bottom: 1px solid var(--wild-border);
-        }
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--wild-cream);
-            text-decoration: none;
-            letter-spacing: -0.3px;
-        }
-        .logo i {
-            color: var(--wild-gold);
-            margin-right: 6px;
-        }
-        .logo span {
-            color: var(--wild-gold);
-            font-weight: 700;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--wild-text);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            letter-spacing: 0.3px;
-        }
-        .nav-links a:hover {
-            color: var(--wild-gold-light);
-        }
-        .btn-reserve {
-            background: var(--wild-gold);
-            color: #0a0c0a !important;
-            padding: 0.6rem 1.6rem;
-            border-radius: 40px;
-            font-weight: 700 !important;
-        }
-        .btn-reserve:hover {
-            background: var(--wild-gold-light);
-            transform: translateY(-2px);
-        }
-        .mobile-menu {
-            display: none;
-            font-size: 1.7rem;
-            color: var(--wild-cream);
-            background: none;
-            border: none;
-            cursor: pointer;
+        /* NAVBAR */
+
+        .navbar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:1000;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:1rem 3rem;
+            background:rgba(0,0,0,0.25);
+            backdrop-filter:blur(12px);
         }
 
-        /* HERO with Wild Stripes identity */
-        .hero {
-            height: 100vh;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(115deg, #0a0c0a 0%, #151d17 100%), url('https://images.unsplash.com/photo-1547471080-7cc2caa01f7e?w=1600&q=80');
-            background-blend-mode: overlay;
-            background-size: cover;
-            background-position: center 30%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 30% 40%, rgba(0,0,0,0.2) 0%, rgba(10,12,10,0.7) 90%);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            padding: 0 1.5rem;
-            animation: fadeUp 1s ease-out;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(35px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        .hero-content .badge {
-            display: inline-block;
-            background: rgba(203, 158, 75, 0.18);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(203,158,75,0.5);
-            padding: 0.5rem 1.3rem;
-            border-radius: 60px;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            color: var(--wild-gold-light);
-            margin-bottom: 1.2rem;
-        }
-        .hero-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1.1;
-            text-shadow: 0 4px 35px rgba(0,0,0,0.6);
-        }
-        .hero-content h1 span {
-            color: var(--wild-gold-light);
-            font-style: italic;
-        }
-        .hero-content p {
-            font-size: 1.2rem;
-            margin: 1.8rem 0 2.2rem;
-            color: #e2ddd0;
-            font-weight: 300;
-        }
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-primary {
-            background: var(--wild-gold);
-            padding: 0.9rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            color: #0a0c0a;
-            text-decoration: none;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-outline-light {
-            border: 2px solid rgba(255,255,240,0.5);
-            background: transparent;
-            padding: 0.9rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-primary:hover, .btn-outline-light:hover {
-            transform: translateY(-4px);
-            background: var(--wild-gold-light);
-            color: #0a0c0a;
-        }
-        .btn-outline-light:hover {
-            background: rgba(255,255,240,0.1);
-            border-color: white;
+        .logo{
+            color:white;
+            text-decoration:none;
+            font-size:1.8rem;
+            font-family:'Playfair Display',serif;
+            font-weight:800;
         }
 
-        /* stats strip */
-        .stats-strip {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            max-width: 1100px;
-            margin: -70px auto 0;
-            position: relative;
-            z-index: 6;
-            gap: 1.2rem;
-            padding: 0 2rem;
-        }
-        .stat-card {
-            background: rgba(20, 26, 22, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--wild-border);
-            border-radius: 24px;
-            padding: 1.8rem 1rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .stat-card i {
-            font-size: 2rem;
-            color: var(--wild-gold);
-            margin-bottom: 0.7rem;
-        }
-        .stat-card h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            font-family: 'Playfair Display', serif;
-        }
-        .stat-card p {
-            color: var(--wild-muted);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .stat-card:hover {
-            border-color: var(--wild-gold);
-            transform: translateY(-6px);
+        .logo span{
+            color:var(--wild-gold);
         }
 
-        /* general section */
-        .section {
-            padding: 5rem 2rem;
-        }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .section-title .tag {
-            color: var(--wild-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .section-title h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: white;
-            font-weight: 700;
-        }
-        .section-title h2 span {
-            color: var(--wild-gold-light);
+        .nav-links{
+            display:flex;
+            gap:2rem;
+            list-style:none;
         }
 
-        /* safari experiences */
-        .safari-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .safari-card {
-            background: var(--wild-card);
-            border: 1px solid rgba(203,158,75,0.2);
-            border-radius: 28px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        .safari-card:hover {
-            border-color: var(--wild-gold);
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-gold);
-        }
-        .safari-img {
-            height: 220px;
-            overflow: hidden;
-        }
-        .safari-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-        .safari-card:hover .safari-img img {
-            transform: scale(1.05);
-        }
-        .safari-info {
-            padding: 1.8rem;
-        }
-        .safari-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: white;
-        }
-        .safari-info p {
-            color: var(--wild-muted);
-            margin: 0.6rem 0 1rem;
-            font-size: 0.9rem;
-        }
-        .expedition-tag {
-            color: var(--wild-gold);
-            font-weight: 600;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 0.5rem;
+        .nav-links a{
+            color:white;
+            text-decoration:none;
+            font-weight:500;
         }
 
-        /* wildlife showcase (big 5 nepal style) */
-        .wildlife-showcase {
-            background: #0f1310;
-            border-radius: 48px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-        .wildlife-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .wildlife-item {
-            background: rgba(0,0,0,0.3);
-            border-radius: 60px;
-            padding: 1rem 0.5rem;
-            transition: 0.2s;
-            border: 1px solid rgba(203,158,75,0.2);
-        }
-        .wildlife-item i {
-            font-size: 2.3rem;
-            color: var(--wild-gold);
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        .wildlife-item span {
-            font-weight: 600;
-            font-size: 0.9rem;
+        .btn-reserve{
+            background:var(--wild-gold);
+            color:black !important;
+            padding:0.7rem 1.5rem;
+            border-radius:50px;
+            font-weight:700 !important;
         }
 
-        /* locations - chitwan & bardiya */
-        .locations-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        .location-card {
-            flex: 1;
-            background: var(--wild-card);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid var(--wild-border);
-        }
-        .location-card .content {
-            padding: 2rem;
-        }
-        .location-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--wild-gold);
-        }
-        .location-card p {
-            color: var(--wild-text);
-            margin-top: 0.8rem;
-            font-size: 0.95rem;
-        }
-        .location-img {
-            height: 240px;
-            background-size: cover;
-            background-position: center;
+        /* HERO */
+
+        .hero{
+            height:100vh;
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            justify-content:center;
+            align-items:center;
         }
 
-        /* booking form */
-        .booking-wrapper {
-            background: linear-gradient(125deg, #111813, #0c100e);
-            border-radius: 40px;
-            padding: 2rem;
-            border: 1px solid var(--wild-border);
-            max-width: 1000px;
-            margin: 2rem auto;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        .form-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-        .form-field.full {
-            grid-column: span 2;
-        }
-        input, select, textarea {
-            background: #1b221e;
-            border: 1px solid #2e3a33;
-            padding: 0.9rem 1rem;
-            border-radius: 20px;
-            color: white;
-            font-family: inherit;
-            outline: none;
-            transition: 0.2s;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--wild-gold);
-        }
-        label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: var(--wild-muted);
-        }
-        .btn-submit {
-            background: var(--wild-gold);
-            border: none;
-            color: #0a0c0a;
-            font-weight: 800;
-            padding: 1rem;
-            border-radius: 60px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-        }
-        .booking-confirm {
-            text-align: center;
-            padding: 2rem;
-        }
-        .footer {
-            padding: 3rem 2rem 2rem;
-            border-top: 1px solid var(--wild-border);
-            background: #080b09;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-        .social-icons a {
-            background: #1a201c;
-            width: 36px;
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--wild-text);
-            transition: 0.2s;
+        .hero-carousel{
+            position:absolute;
+            inset:0;
         }
 
-        @media (max-width: 840px) {
-            .nav-links { display: none; position: fixed; top: 0; right: 0; width: 260px; background: #0c100ed9; backdrop-filter: blur(20px); flex-direction: column; padding: 5rem 2rem; z-index: 1100; border-left: 1px solid var(--wild-border); height: 100%; }
-            .nav-links.active { display: flex; }
-            .mobile-menu { display: block; z-index: 1101; }
-            .stats-strip { grid-template-columns: 1fr 1fr; margin-top: -40px; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-field.full { grid-column: span 1; }
-            .locations-row { flex-direction: column; }
+        .carousel-slide{
+            position:absolute;
+            inset:0;
+            background-size:cover;
+            background-position:center;
+            opacity:0;
+            transform:scale(1.08);
+            transition:
+            opacity 1.5s ease,
+            transform 8s ease;
         }
-        @media (max-width: 520px) {
-            .stats-strip { grid-template-columns: 1fr; }
-            .section-title h2 { font-size: 2rem; }
+
+        .carousel-slide.active{
+            opacity:1;
+            transform:scale(1);
         }
-        button, .btn-primary, .btn-outline-light { cursor: pointer; }
-        .hidden-form { display: none; }
-        .mt-3 { margin-top: 1rem; }
+
+        .hero-overlay{
+            position:absolute;
+            inset:0;
+            background:
+            linear-gradient(
+                to top,
+                rgba(0,0,0,0.85),
+                rgba(0,0,0,0.3)
+            );
+            z-index:1;
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:5;
+            text-align:center;
+            max-width:900px;
+            padding:0 1.5rem;
+        }
+
+        .badge{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:0.7rem 1.5rem;
+            border-radius:50px;
+            background:rgba(0,0,0,0.35);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,0.15);
+            color:var(--wild-gold-light);
+            margin-bottom:1.5rem;
+            letter-spacing:2px;
+            font-size:0.85rem;
+            font-weight:700;
+        }
+
+        .hero-content h1{
+            font-size:5rem;
+            line-height:1.05;
+            color:white;
+            font-family:'Playfair Display',serif;
+            font-weight:800;
+            text-shadow:0 5px 35px rgba(0,0,0,0.5);
+        }
+
+        .hero-content h1 span{
+            color:var(--wild-gold-light);
+            font-style:italic;
+        }
+
+        .hero-content p{
+            margin:1.5rem auto 2rem;
+            max-width:700px;
+            font-size:1.2rem;
+            color:#ece4d4;
+        }
+
+        .btn-group{
+            display:flex;
+            justify-content:center;
+            gap:1rem;
+            flex-wrap:wrap;
+        }
+
+        .btn-primary{
+            background:var(--wild-gold);
+            color:black;
+            padding:1rem 2rem;
+            border-radius:50px;
+            text-decoration:none;
+            font-weight:700;
+        }
+
+        .btn-outline{
+            border:2px solid white;
+            color:white;
+            padding:1rem 2rem;
+            border-radius:50px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        /* SECTION */
+
+        .section{
+            padding:5rem 2rem;
+        }
+
+        .container{
+            max-width:1300px;
+            margin:auto;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:3rem;
+        }
+
+        .section-title .tag{
+            color:var(--wild-gold);
+            letter-spacing:3px;
+            margin-bottom:1rem;
+            font-size:0.8rem;
+        }
+
+        .section-title h2{
+            color:white;
+            font-size:3rem;
+            font-family:'Playfair Display',serif;
+        }
+
+        .section-title h2 span{
+            color:var(--wild-gold-light);
+        }
+
+        /* SAFARI CARDS */
+
+        .safari-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:2rem;
+        }
+
+        .safari-card{
+            background:var(--wild-card);
+            border-radius:28px;
+            overflow:hidden;
+            transition:0.4s;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .safari-card:hover{
+            transform:translateY(-8px);
+            border-color:var(--wild-gold);
+        }
+
+        .safari-img{
+            height:240px;
+            overflow:hidden;
+        }
+
+        .safari-img img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .safari-info{
+            padding:1.7rem;
+        }
+
+        .expedition-tag{
+            color:var(--wild-gold);
+            font-size:0.8rem;
+            font-weight:700;
+            margin-bottom:0.7rem;
+            display:block;
+        }
+
+        .safari-info h3{
+            font-size:1.5rem;
+            margin-bottom:0.8rem;
+            color:white;
+            font-family:'Playfair Display',serif;
+        }
+
+        .safari-info p{
+            color:var(--wild-muted);
+            line-height:1.7;
+        }
+
+        /* BOOKING SECTION */
+
+        .booking-wrapper{
+            background:#121712;
+            border-radius:30px;
+            padding:3rem;
+            border:1px solid rgba(255,255,255,0.08);
+            max-width:1000px;
+            margin:auto;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:1.5rem;
+        }
+
+        .form-field{
+            display:flex;
+            flex-direction:column;
+        }
+
+        .form-field label{
+            margin-bottom:0.7rem;
+            font-size:0.85rem;
+            color:var(--wild-muted);
+            letter-spacing:1px;
+            font-weight:600;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea{
+            background:#1a201c;
+            border:1px solid #2d352f;
+            color:white;
+            padding:1rem;
+            border-radius:18px;
+            font-family:inherit;
+            outline:none;
+        }
+
+        .full-width{
+            grid-column:span 2;
+        }
+
+        .booking-btn{
+            background:var(--wild-gold);
+            border:none;
+            padding:1rem;
+            border-radius:50px;
+            font-weight:800;
+            cursor:pointer;
+            font-size:1rem;
+        }
+
+        .booking-success{
+            display:none;
+            text-align:center;
+            padding:3rem 1rem;
+        }
+
+        .booking-success i{
+            font-size:4rem;
+            color:var(--wild-gold);
+            margin-bottom:1rem;
+        }
+
+        /* FOOTER */
+
+        .footer{
+            padding:4rem 2rem;
+            background:#080a08;
+            border-top:1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:2rem;
+        }
+
+        .social-icons a{
+            width:40px;
+            height:40px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:50%;
+            background:#151a15;
+            color:white;
+            text-decoration:none;
+            margin-right:10px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .navbar{
+                padding:1rem 1.5rem;
+            }
+
+            .nav-links{
+                display:none;
+            }
+
+            .hero-content h1{
+                font-size:2.8rem;
+            }
+
+            .section-title h2{
+                font-size:2rem;
+            }
+
+            .form-grid{
+                grid-template-columns:1fr;
+            }
+
+            .full-width{
+                grid-column:span 1;
+            }
+
+            .booking-wrapper{
+                padding:2rem;
+            }
+
+        }
+
     </style>
+
 </head>
+
 <body>
 
-<nav class="navbar" id="navbar">
-   <a href="#" class="logo">
-    <img src="logo.png" alt="The Wild Stripes" style="height: 40px;">
-    <span style="margin-left: 10px;">THE WILD <span>STRIPES</span></span>
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+
+    <img 
+        src="images/logo.png" 
+        alt="The Wild Stripes"
+        style="
+            height:48px;
+            width:auto;
+            object-fit:contain;
+        "
+    >
+
 </a>
-    <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#experiences">Safaris</a></li>
-        <li><a href="#destinations">Destinations</a></li>
-        <li><a href="#booking">Reserve</a></li>
-        <li><a href="#booking" class="btn-reserve"><i class="fa-regular fa-calendar"></i> Book Now</a></li>
-    </ul>
-    <button class="mobile-menu" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
-</nav>
 
-<!-- Hero with Wild Stripes essence -->
-<section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <div class="badge">NEPAL • CHITWAN • BARDIYA</div>
-        <h1>Your Gateway to <span>Nepal's Untamed</span> Wilderness</h1>
-        <p>Immersive jungle safaris, Royal Bengal Tiger tracking, one-horned rhino encounters & ethical eco-adventures.</p>
-        <div class="btn-group">
-            <a href="#booking" class="btn-primary"><i class="fa-solid fa-compass"></i> Plan Safari</a>
-            <a href="#experiences" class="btn-outline-light"><i class="fa-regular fa-eye"></i> Discover Experiences</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#experiences">Safaris</a></li>
+            <li><a href="#booking">Reserve</a></li>
+            <li><a href="#booking" class="btn-reserve">Book Now</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-carousel">
+
+            <!-- P1 -->
+            <div class="carousel-slide active" style="background-image:url('images/p1.jpg')"></div>
+
+            <!-- P2 -->
+            <div class="carousel-slide" style="background-image:url('images/p2.jpg')"></div>
+
+            <!-- P3 -->
+            <div class="carousel-slide" style="background-image:url('images/p3.jpg')"></div>
+
+            <!-- P4 -->
+            <div class="carousel-slide" style="background-image:url('images/p4.jpg')"></div>
+
+            <!-- P5 -->
+            <div class="carousel-slide" style="background-image:url('images/p5.jpg')"></div>
+
         </div>
-    </div>
-</section>
 
-<!-- Stats section (about us summary) -->
-<div class="stats-strip">
-    <div class="stat-card"><i class="fa-solid fa-tiger"></i><h3>200+</h3><p>Big Cats Sightings</p></div>
-    <div class="stat-card"><i class="fa-regular fa-clock"></i><h3>12+ Yrs</h3><p>Conservation Focus</p></div>
-    <div class="stat-card"><i class="fa-solid fa-bird"></i><h3>650+</h3><p>Bird Species</p></div>
-    <div class="stat-card"><i class="fa-solid fa-leaf"></i><h3>100%</h3><p>Eco-Friendly Tourism</p></div>
-</div>
+        <div class="hero-overlay"></div>
 
-<!-- Safari Experiences / tailored from PDF: jeep safari, jungle walk, birdwatching, expeditions -->
-<section class="section" id="experiences">
-    <div class="container">
-        <div class="section-title">
-            <div class="tag">——— UNFORGETTABLE ENCOUNTERS</div>
-            <h2>Our <span>Safari Experiences</span></h2>
-            <p style="color:var(--wild-muted); max-width:600px; margin:0 auto;">Expertly curated jungle safaris, jeep expeditions, and walking trails in Nepal's renowned national parks.</p>
+        <div class="hero-content">
+
+            <div class="badge">
+                <i class="fa-solid fa-leaf"></i>
+                ETHICAL • LUXURY • WILDLIFE
+            </div>
+
+            <h1>
+                Your Gateway to
+                <span>Nepal's Untamed</span>
+                Wilderness
+            </h1>
+
+            <p>
+                Immersive jungle safaris, Royal Bengal Tiger tracking,
+                one-horned rhino encounters & ethical eco-adventures.
+            </p>
+
+            <div class="btn-group">
+
+                <a href="#experiences" class="btn-primary">
+                    Explore Safaris
+                </a>
+
+                <a href="#booking" class="btn-outline">
+                    Book Adventure
+                </a>
+
+            </div>
+
         </div>
-        <div class="safari-grid">
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1589923150859-9c76b2eb9dbb?w=600&q=80" alt="Jeep Safari"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-solid fa-car-side"></i> THRILLING</span><h3>Exclusive Jeep Safaris</h3><p>Half-day or full-day off-road adventures across Chitwan & Bardiya. Cover grasslands & riverine forests, spot rhinos, tigers, and wild elephants.</p></div></div>
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=600&q=80" alt="Jungle Walk"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-solid fa-hiking"></i> IMMERSIVE</span><h3>Jungle Walk & Nature Trails</h3><p>Explore hidden trails on foot with expert naturalists. Learn about local flora, animal tracks, and encounter wildlife ethically.</p></div></div>
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1575551076066-4b8b7e52fade?w=600&q=80" alt="Birdwatching"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-solid fa-binoculars"></i> 650+ SPECIES</span><h3>Bird Watching Tours</h3><p>Vibrant guided birding tours in wetlands & sal forests, perfect for spotting hornbills, raptors, and migratory birds.</p></div></div>
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80" alt="Red Panda"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-solid fa-paw"></i> RARE QUEST</span><h3>Red Panda Expedition</h3><p>High-altitude quest to spot the elusive red panda. Supporting conservation, ethical tracking in eastern Nepal's forests.</p></div></div>
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80" alt="Snow Leopard"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-solid fa-mountain"></i> LEGENDARY</span><h3>Snow Leopard Expeditions</h3><p>Venture into rugged terrains to seek the 'Ghost of the Mountains'. Seasoned trackers boost chances of spotting this majestic predator.</p></div></div>
-            <div class="safari-card"><div class="safari-img"><img src="https://images.unsplash.com/photo-1561498121-1fb0dc6c29c5?w=600&q=80" alt="Canopy"></div><div class="safari-info"><span class="expedition-tag"><i class="fa-regular fa-clock"></i> FLEXIBLE</span><h3>Custom Packages (1-5 Days)</h3><p>Tailor your own itinerary from 1-day adventure to extended expeditions. Tiger tracking, cultural Tharu village tours, canoe rides.</p></div></div>
+
+    </section>
+
+    <!-- SAFARI EXPERIENCES -->
+
+    <section class="section" id="experiences">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="tag">
+                    UNFORGETTABLE ENCOUNTERS
+                </div>
+
+                <h2>
+                    Our <span>Safari Experiences</span>
+                </h2>
+
+            </div>
+
+            <div class="safari-grid">
+
+                <!-- P6 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p6.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            THRILLING
+                        </span>
+
+                        <h3>Exclusive Jeep Safaris</h3>
+
+                        <p>
+                            Half-day or full-day off-road adventures
+                            across Chitwan & Bardiya.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- P7 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p7.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            IMMERSIVE
+                        </span>
+
+                        <h3>Jungle Walk & Nature Trails</h3>
+
+                        <p>
+                            Explore hidden trails on foot with expert
+                            naturalists.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- P8 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p8.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            650+ SPECIES
+                        </span>
+
+                        <h3>Bird Watching Tours</h3>
+
+                        <p>
+                            Vibrant guided birding tours across
+                            Nepal’s wetlands & forests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- P9 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p9.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            RARE QUEST
+                        </span>
+
+                        <h3>Red Panda Expedition</h3>
+
+                        <p>
+                            Discover the elusive red panda in
+                            eastern Nepal’s forests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- P10 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p10.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            LEGENDARY
+                        </span>
+
+                        <h3>Snow Leopard Expeditions</h3>
+
+                        <p>
+                            Venture into rugged Himalayan terrain
+                            to seek the ghost of the mountains.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- P11 -->
+
+                <div class="safari-card">
+
+                    <div class="safari-img">
+                        <img src="images/p11.jpg">
+                    </div>
+
+                    <div class="safari-info">
+
+                        <span class="expedition-tag">
+                            FLEXIBLE
+                        </span>
+
+                        <h3>Custom Packages (1-5 Days)</h3>
+
+                        <p>
+                            Tailor your safari itinerary around
+                            your interests and travel plans.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    </div>
-</section>
 
-<!-- Wildlife promise: Royal Bengal Tiger, Leopard, Rhino etc (PDF page 5) -->
-<div class="container" style="margin-top:-1rem; margin-bottom:2rem;">
-    <div class="wildlife-showcase">
-        <div class="section-title" style="margin-bottom:1rem;"><h2>Unforgettable <span>Wildlife Encounters</span></h2></div>
-        <div class="wildlife-grid">
-            <div class="wildlife-item"><i class="fa-solid fa-paw"></i><span>Royal Bengal Tiger</span></div>
-            <div class="wildlife-item"><i class="fa-solid fa-eye"></i><span>Leopard</span></div>
-            <div class="wildlife-item"><i class="fa-solid fa-helmet-safety"></i><span>One‑Horned Rhino</span></div>
-            <div class="wildlife-item"><i class="fa-solid fa-buffalo"></i><span>Wild Bison (Gaur)</span></div>
-            <div class="wildlife-item"><i class="fa-solid fa-elephant"></i><span>Asian Elephant</span></div>
-            <div class="wildlife-item"><i class="fa-solid fa-bear"></i><span>Sloth Bear</span></div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+
+    <section class="section" id="booking">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="tag">
+                    RESERVE YOUR ADVENTURE
+                </div>
+
+                <h2>
+                    Begin Your <span>Wild Journey</span>
+                </h2>
+
+            </div>
+
+            <div class="booking-wrapper">
+
+                <form id="bookingForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label>Full Name *</label>
+                            <input type="text" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Email *</label>
+                            <input type="email" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Phone / WhatsApp</label>
+                            <input type="tel">
+                        </div>
+
+                        <div class="form-field">
+
+                            <label>Destination *</label>
+
+                            <select required>
+
+                                <option>Select Destination</option>
+
+                                <option>Chitwan National Park</option>
+
+                                <option>Bardiya National Park</option>
+
+                                <option>Red Panda Expedition</option>
+
+                                <option>Snow Leopard Expedition</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-field">
+                            <label>Arrival Date *</label>
+                            <input type="date">
+                        </div>
+
+                        <div class="form-field">
+
+                            <label>Duration</label>
+
+                            <select>
+
+                                <option>1 Day Adventure</option>
+                                <option>2 Days / 1 Night</option>
+                                <option>3 Days / 2 Nights</option>
+                                <option>4-5 Days Explorer</option>
+                                <option>Custom Expedition</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-field full-width">
+
+                            <label>Special Requests</label>
+
+                            <textarea rows="5"></textarea>
+
+                        </div>
+
+                        <div class="form-field full-width">
+
+                            <button class="booking-btn" type="submit">
+                                REQUEST BOOKING
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <div class="booking-success" id="bookingSuccess">
+
+                    <i class="fa-regular fa-circle-check"></i>
+
+                    <h3>
+                        Booking Request Received!
+                    </h3>
+
+                    <p>
+                        Our safari specialists will contact you shortly.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-    </div>
-</div>
 
-<!-- Prime Locations: Chitwan & Bardiya (PDF page 8) -->
-<section class="section" id="destinations">
-    <div class="container">
-        <div class="section-title"><div class="tag">PRIME LOCATIONS</div><h2>Nepal’s <span>Wild Heartlands</span></h2></div>
-        <div class="locations-row">
-            <div class="location-card"><div class="location-img" style="background-image: url('https://images.unsplash.com/photo-1592503254549-d0d67cd8b3c7?w=800&q=80');"></div><div class="content"><h3>Chitwan National Park</h3><p>UNESCO World Heritage Site, spanning 952 km². Home to one-horned rhinos, Bengal tigers, leopards, sloth bears, and over 650 bird species. Enjoy serene canoe rides on Rapti River & Tharu cultural experiences.</p></div></div>
-            <div class="location-card"><div class="location-img" style="background-image: url('https://images.unsplash.com/photo-1581191773150-2a0e5ee8e318?w=800&q=80');"></div><div class="content"><h3>Bardiya National Park</h3><p>Known as "Tigerland" — 968 km² of dense sal forests, grasslands, and river corridors. Prime habitat for Royal Bengal Tigers, wild elephants, Gangetic dolphins and over 400 bird species.</p></div></div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <h3 style="margin-bottom:1rem;">
+                        THE WILD STRIPES
+                    </h3>
+
+                    <p>
+                        Ethical wildlife safaris,
+                        tiger tracking and eco-adventures
+                        across Nepal.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4 style="margin-bottom:1rem;">
+                        Contact
+                    </h4>
+
+                    <p>
+                        +977 - 9843960458
+                    </p>
+
+                    <p>
+                        wildstripes1111@gmail.com
+                    </p>
+
+                    <p>
+                        Kathmandu, Nepal
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4 style="margin-bottom:1rem;">
+                        Social
+                    </h4>
+
+                    <div class="social-icons">
+
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    </div>
-</section>
 
-<!-- Booking section full mirror from PDF -->
-<section class="section" id="booking">
-    <div class="container">
-        <div class="section-title"><div class="tag">RESERVE YOUR ADVENTURE</div><h2>Begin Your <span>Wild Journey</span></h2><p>Custom itineraries, tiger tracking, birdwatching or red panda quest — we craft your dream safari.</p></div>
-        <div class="booking-wrapper" id="bookingWidget">
-            <form id="bookingForm" class="form-grid">
-                <div class="form-field"><label>Full Name *</label><input type="text" id="fullname" required placeholder="e.g., Alex Thompson"></div>
-                <div class="form-field"><label>Email *</label><input type="email" id="email" required placeholder="hello@example.com"></div>
-                <div class="form-field"><label>Phone (WhatsApp)</label><input type="tel" id="phone" placeholder="+977 XXXX"></div>
-                <div class="form-field"><label>Preferred Park *</label><select id="park" required><option value="">Select</option><option>Chitwan National Park</option><option>Bardiya National Park</option><option>Custom Expedition (Red Panda / Snow Leopard)</option></select></div>
-                <div class="form-field"><label>Arrival Date *</label><input type="date" id="date" required min="2026-06-01"></div>
-                <div class="form-field"><label>Days / Package</label><select id="duration"><option>1 Day Adventure</option><option>2 Days / 1 Night</option><option>3 Days / 2 Nights</option><option>4-5 Days Explorer</option><option>Custom multi-day</option></select></div>
-                <div class="form-field full"><label>Special Requests (Tiger tracking / Birding / Red Panda)</label><textarea rows="2" placeholder="Tell us your interests..."></textarea></div>
-                <div class="form-field full"><button type="submit" class="btn-submit"><i class="fa-regular fa-paper-plane"></i> REQUEST QUOTE & BOOKING</button></div>
-            </form>
-            <div id="confirmationMsg" style="display: none;" class="booking-confirm"><i class="fa-regular fa-circle-check" style="font-size:3rem; color:var(--wild-gold);"></i><h3>Booking request received!</h3><p>Thank you for choosing The Wild Stripes. Our team will contact you within 24h to finalize your jungle safari, including permits and lodge options. <br> ✨ “Every journey supports conservation & local communities.”</p><button class="btn-primary mt-3" id="newBookingBtn">Plan Another Safari</button></div>
-        </div>
-    </div>
-</section>
+    </footer>
 
-<!-- Footer with contacts as per PDF: email, phone, social -->
-<footer class="footer">
-    <div class="footer-grid">
-        <div><h3 style="font-family:Playfair Display;"><i class="fa-solid fa-paw"></i> The Wild Stripes</h3><p>Your gateway to Nepal’s untamed wilderness — ethical wildlife safaris, snow leopard & red panda expeditions, birdwatching, and community conservation.</p><div class="social-icons mt-3"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
-        <div><h4>Quick Safari</h4><ul style="list-style:none;"><li>✓ Jeep Safari</li><li>✓ Jungle Walk</li><li>✓ Canoe Ride</li><li>✓ Snow Leopard Tour</li></ul></div>
-        <div><h4>Contact</h4><p><i class="fa-solid fa-phone"></i> +977 - 9843960458</p><p><i class="fa-regular fa-envelope"></i> wildstripes1111@gmail.com</p><p><i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</p><p><i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-instagram"></i> @wildstripesnepal</p></div>
-    </div>
-    <div class="container" style="text-align:center; margin-top:2rem; border-top:1px solid rgba(203,158,75,0.2); padding-top:2rem;"><small>© 2026 THE WILD STRIPES — Conservation & Eco-Adventure | Inspired by Nepal's Wild Heritage</small></div>
-</footer>
+    <!-- JAVASCRIPT -->
 
-<script>
-    // Mobile toggle
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const navLinksEl = document.getElementById('navLinks');
-    menuBtn.addEventListener('click', () => {
-        navLinksEl.classList.toggle('active');
-        const icon = menuBtn.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => { navLinksEl.classList.remove('active'); if(menuBtn.querySelector('i')){ menuBtn.querySelector('i').classList.remove('fa-xmark'); menuBtn.querySelector('i').classList.add('fa-bars'); } });
-    });
-    // Navbar scroll
-    window.addEventListener('scroll', () => {
-        const navbar = document.getElementById('navbar');
-        if(window.scrollY > 50) navbar.classList.add('scrolled');
-        else navbar.classList.remove('scrolled');
-    });
-    // Booking form logic
-    const bookingForm = document.getElementById('bookingForm');
-    const confirmDiv = document.getElementById('confirmationMsg');
-    const bookingWidget = document.getElementById('bookingWidget');
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('fullname').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const park = document.getElementById('park').value;
-        if(!name || !email || !park) {
-            alert("Please fill your name, email and preferred park.");
-            return;
-        }
-        bookingForm.style.display = 'none';
-        confirmDiv.style.display = 'block';
-        window.scrollTo({ top: bookingWidget.offsetTop - 80, behavior: 'smooth' });
-    });
-    document.getElementById('newBookingBtn')?.addEventListener('click', () => {
-        bookingForm.reset();
-        bookingForm.style.display = 'grid';
-        confirmDiv.style.display = 'none';
-    });
-    // smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e){
-            const targetId = this.getAttribute('href');
-            if(targetId === "#") return;
-            const target = document.querySelector(targetId);
-            if(target){
-                e.preventDefault();
-                const offset = 70;
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => { window.scrollBy(0, -offset); }, 10);
+    <script>
+
+        /* HERO CAROUSEL */
+
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        let currentSlide = 0;
+
+        setInterval(() => {
+
+            slides[currentSlide].classList.remove('active');
+
+            currentSlide++;
+
+            if(currentSlide >= slides.length){
+                currentSlide = 0;
             }
+
+            slides[currentSlide].classList.add('active');
+
+        }, 4500);
+
+        /* BOOKING FORM */
+
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingSuccess = document.getElementById('bookingSuccess');
+
+        bookingForm.addEventListener('submit', function(e){
+
+            e.preventDefault();
+
+            bookingForm.style.display = 'none';
+
+            bookingSuccess.style.display = 'block';
+
         });
-    });
-    // Intersection animations (basic)
-    const fadeElements = document.querySelectorAll('.safari-card, .location-card, .stat-card, .wildlife-item');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0px)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    fadeElements.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = '0.5s ease-out'; observer.observe(el); });
-</script>
+
+    </script>
+
 </body>
 </html>
+```
