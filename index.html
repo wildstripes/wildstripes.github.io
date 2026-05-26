@@ -44,52 +44,72 @@
 
         /* NAVBAR */
 
-        .navbar{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            z-index:1000;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:1rem 3rem;
-            background:rgba(0,0,0,0.25);
-            backdrop-filter:blur(12px);
-        }
+/* NAVBAR */
 
-        .logo img{
-            height:52px;
-            width:auto;
-            object-fit:contain;
-            display:block;
-        }
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 3rem;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(12px);
+}
 
-        .nav-links{
-            display:flex;
-            gap:2rem;
-            list-style:none;
-            align-items:center;
-        }
+.logo-wrapper{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
 
-        .nav-links a{
-            color:white;
-            text-decoration:none;
-            font-weight:500;
-            transition:0.3s;
-        }
+.logo img{
+    height:58px;
+    width:auto;
+    object-fit:contain;
+    display:block;
+}
 
-        .nav-links a:hover{
-            color:var(--wild-gold-light);
-        }
+.logo-text{
+    color:white;
+    font-size:1.4rem;
+    font-weight:800;
+    letter-spacing:1px;
+    font-family:'Playfair Display',serif;
+}
 
-        .btn-reserve{
-            background:var(--wild-gold);
-            color:black !important;
-            padding:0.8rem 1.5rem;
-            border-radius:50px;
-            font-weight:700 !important;
-        }
+.logo-text span{
+    color:var(--wild-gold-light);
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+    list-style:none;
+    align-items:center;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:var(--wild-gold-light);
+}
+
+.btn-reserve{
+    background:var(--wild-gold);
+    color:black !important;
+    padding:0.8rem 1.5rem;
+    border-radius:50px;
+    font-weight:700 !important;
+}
 
         /* HERO */
 
@@ -136,13 +156,20 @@
             z-index:1;
         }
 
-        .hero-content{
-            position:relative;
-            z-index:5;
-            text-align:center;
-            max-width:900px;
-            padding:0 1.5rem;
-        }
+.hero-content{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    max-width:1000px;
+    width:100%;
+    margin:auto;
+    padding:0 2rem;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
 
         .badge{
             display:inline-flex;
@@ -160,14 +187,15 @@
             font-weight:700;
         }
 
-        .hero-content h1{
-            font-size:5rem;
-            line-height:1.05;
-            color:white;
-            font-family:'Playfair Display',serif;
-            font-weight:800;
-            text-shadow:0 5px 35px rgba(0,0,0,0.5);
-        }
+.hero-content h1{
+    font-size:5.4rem;
+    line-height:0.95;
+    color:white;
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    text-shadow:0 5px 35px rgba(0,0,0,0.7);
+    text-align:center;
+}
 
         .hero-content h1 span{
             color:var(--wild-gold-light);
@@ -392,37 +420,46 @@
 
         /* MOBILE */
 
-        @media(max-width:768px){
+@media(max-width:768px){
 
-            .navbar{
-                padding:1rem 1.2rem;
-            }
+    .navbar{
+        padding:1rem 1.2rem;
+    }
 
-            .nav-links{
-                display:none;
-            }
+    .nav-links{
+        display:none;
+    }
 
-            .hero-content h1{
-                font-size:2.8rem;
-            }
+    .logo-text{
+        font-size:1rem;
+    }
 
-            .section-title h2{
-                font-size:2rem;
-            }
+    .logo img{
+        height:46px;
+    }
 
-            .form-grid{
-                grid-template-columns:1fr;
-            }
+    .hero-content h1{
+        font-size:3rem;
+        line-height:1;
+    }
 
-            .full-width{
-                grid-column:span 1;
-            }
+    .section-title h2{
+        font-size:2rem;
+    }
 
-            .booking-wrapper{
-                padding:2rem;
-            }
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-        }
+    .full-width{
+        grid-column:span 1;
+    }
+
+    .booking-wrapper{
+        padding:2rem;
+    }
+
+}
 
     </style>
 
@@ -432,31 +469,41 @@
 
     <!-- NAVBAR -->
 
-    <nav class="navbar">
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo-wrapper">
 
         <a href="#" class="logo">
 
-            <img src="logo.png" alt="The Wild Stripes Logo">
+            <img src="images/logo.png" alt="The Wild Stripes Logo">
 
         </a>
 
-        <ul class="nav-links">
+        <div class="logo-text">
+            THE WILD <span>STRIPES</span>
+        </div>
 
-            <li><a href="#">Home</a></li>
+    </div>
 
-            <li><a href="#experiences">Safaris</a></li>
+    <ul class="nav-links">
 
-            <li><a href="#booking">Reserve</a></li>
+        <li><a href="#">Home</a></li>
 
-            <li>
-                <a href="#booking" class="btn-reserve">
-                    Book Now
-                </a>
-            </li>
+        <li><a href="#experiences">Safaris</a></li>
 
-        </ul>
+        <li><a href="#booking">Reserve</a></li>
 
-    </nav>
+        <li>
+            <a href="#booking" class="btn-reserve">
+                Book Now
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
 
     <!-- HERO -->
 
