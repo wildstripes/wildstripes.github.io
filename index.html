@@ -113,41 +113,16 @@
 
         /* HERO */
 
-.hero{
-    position: relative;
-
-    width: 100%;
-    height: 100vh;
-
-    min-height: 100vh;
-
-    overflow: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-carousel{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100vh;
-
-    z-index:1;
-}
-
 .carousel-slide{
     position:absolute;
     top:0;
     left:0;
 
     width:100%;
-    height:100vh;
-
+    height:100%;
+    
     background-size:cover;
-    background-position:center center;
+    background-position:center;
     background-repeat:no-repeat;
 
     opacity:0;
@@ -158,35 +133,6 @@
 .carousel-slide.active{
     opacity:1;
 }
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-
-    background:rgba(0,0,0,0.45);
-
-    z-index:2;
-}
-
-.hero-content{
-    position:relative;
-
-    z-index:5;
-
-    width:100%;
-    max-width:1200px;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:0 2rem;
-}
-
         .badge{
             display:inline-flex;
             align-items:center;
@@ -481,20 +427,23 @@
 
 .hero{
     position:relative;
-
     width:100%;
     height:100vh;
-
+    min-height:100vh;
     overflow:hidden;
 
     display:flex;
     justify-content:center;
     align-items:center;
 }
-
 .hero-carousel{
     position:absolute;
-    inset:0;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100vh;
+
     z-index:1;
 }
 
@@ -535,6 +484,30 @@
     background-size: cover !important;
     background-position: center center !important;
 }
+       /* FIX HERO LAYERING */
+
+.hero{
+    position:relative;
+    z-index:1;
+}
+
+.hero-content{
+    position:relative;
+    z-index:5;
+}
+
+.section{
+    position:relative;
+    z-index:20;
+    margin-top:0;
+}
+
+/* FORCE FULLSCREEN HERO */
+
+.hero-carousel,
+.carousel-slide{
+    height:100vh !important;
+} 
     </style>
 
 </head>
@@ -580,7 +553,7 @@
 </nav>
 
     <!-- HERO -->
-
+<section class="hero">
     <div class="hero-carousel">
 
     <!-- P1 -->
