@@ -115,15 +115,17 @@
 
 .hero{
     position: relative;
+
     width: 100%;
     height: 100vh;
+
     min-height: 100vh;
 
     overflow: hidden;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .hero-carousel{
@@ -151,17 +153,12 @@
 
     opacity:0;
 
-    transform:scale(1.08);
-
-    transition:
-    opacity 1.5s ease,
-    transform 8s ease;
+    transition:opacity 1.2s ease;
 }
 
-        .carousel-slide.active{
-            opacity:1;
-            transform:scale(1);
-        }
+.carousel-slide.active{
+    opacity:1;
+}
 
 .hero-overlay{
     position:absolute;
@@ -173,22 +170,22 @@
 }
 
 .hero-content{
-    position: relative;
-    z-index: 10;
+    position:relative;
 
-    width: 100%;
-    max-width: 1200px;
+    z-index:5;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width:100%;
+    max-width:1200px;
 
-    text-align: center;
+    display:flex;
+    flex-direction:column;
 
-    padding: 0 2rem;
+    justify-content:center;
+    align-items:center;
 
-    margin-top: -40px;
+    text-align:center;
+
+    padding:0 2rem;
 }
 
         .badge{
@@ -257,12 +254,13 @@
         /* SECTION */
 
 .section{
-    position: relative;
-    z-index: 100;
+    position:relative;
 
-    background: #050807;
+    z-index:20;
 
-    padding: 8rem 2rem;
+    background:#050807;
+
+    padding:100px 2rem;
 }
         
 
@@ -519,16 +517,8 @@
     padding:0 2rem;
 }
 
-/* THIS IS THE IMPORTANT PART */
 
-#experiences{
-    position:relative;
-    z-index:50;
-
-    margin-top:0;
-
-    background:#050807;
-}   
+ 
         /* FORCE FULLSCREEN HERO */
 
 .hero-carousel,
