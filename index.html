@@ -114,13 +114,17 @@
         /* HERO */
 
         .hero{
-            height:100vh;
-            position:relative;
-            overflow:hidden;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
+    min-height:100vh;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding-bottom:140px;
+}
 
         .hero-carousel{
             position:absolute;
@@ -155,7 +159,22 @@
             );
             z-index:1;
         }
+.hero::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:180px;
 
+    background:linear-gradient(
+        to bottom,
+        rgba(10,12,10,0),
+        rgba(10,12,10,1)
+    );
+
+    z-index:2;
+}
 .hero-content{
     position:relative;
     z-index:5;
@@ -236,9 +255,12 @@
 
         /* SECTION */
 
-        .section{
-            padding:5rem 2rem;
-        }
+.section{
+    padding:7rem 2rem 5rem;
+    position:relative;
+    z-index:5;
+    background:var(--wild-bg);
+}
 
         .container{
             max-width:1300px;
@@ -270,10 +292,14 @@
         /* SAFARI CARDS */
 
         .safari-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:2rem;
-        }
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:2rem;
+
+    margin-top:2rem;
+    position:relative;
+    z-index:10;
+}
 
         .safari-card{
             background:var(--wild-card);
@@ -477,7 +503,7 @@
 
         <a href="#" class="logo">
 
-            <img src="images/logo.png" alt="The Wild Stripes Logo">
+            <img src="logo.png" alt="The Wild Stripes Logo">
 
         </a>
 
@@ -551,22 +577,17 @@
                 Wilderness
             </h1>
 
-            <p>
-                Immersive jungle safaris, Royal Bengal Tiger tracking,
-                one-horned rhino encounters & ethical eco-adventures.
-            </p>
+<div style="margin-top:2.5rem;" class="btn-group">
 
-            <div class="btn-group">
+    <a href="#experiences" class="btn-primary">
+        Explore Safaris
+    </a>
 
-                <a href="#experiences" class="btn-primary">
-                    Explore Safaris
-                </a>
+    <a href="#booking" class="btn-outline">
+        Book Adventure
+    </a>
 
-                <a href="#booking" class="btn-outline">
-                    Book Adventure
-                </a>
-
-            </div>
+</div>
 
         </div>
 
